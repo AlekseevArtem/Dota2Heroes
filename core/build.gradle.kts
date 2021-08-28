@@ -1,4 +1,7 @@
-plugins {
-    id("kotlin")
+apply {
+    from("$rootDir/library-build.gradle")
 }
 
+dependencies {
+
+}
