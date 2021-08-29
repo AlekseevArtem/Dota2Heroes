@@ -15,14 +15,14 @@ class GetHeroes(
 ) {
     fun execute(): Flow<DataState<List<Hero>>> = flow {
         try {
-            emit(DataState.Loading(progressBarState = ProgressBarState.Loading))
+            emit(DataState.Loading<List<Hero>>(progressBarState = ProgressBarState.Loading))
 
             val heroes: List<Hero> = try {
                 service.getHeroStats()
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(
-                    DataState.Response(
+                    DataState.Response<List<Hero>>(
                         uiComponent = UiComponent.Dialog(
                             title = "Network data error",
                             description = e.message ?: "Unknown error"
@@ -39,7 +39,7 @@ class GetHeroes(
         } catch (e: Exception) {
             e.printStackTrace()
             emit(
-                DataState.Response(
+                DataState.Response<List<Hero>>(
                     uiComponent = UiComponent.Dialog(
                         title = "Error",
                         description = e.message ?: "Unknown error"
@@ -47,7 +47,7 @@ class GetHeroes(
                 )
             )
         } finally {
-            emit(DataState.Loading(progressBarState = ProgressBarState.Idle))
+            emit(DataState.Loading<List<Hero>>(progressBarState = ProgressBarState.Idle))
         }
     }
 }
