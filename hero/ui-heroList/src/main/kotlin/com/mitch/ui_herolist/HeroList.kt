@@ -9,12 +9,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import coil.ImageLoader
 import com.mitch.core.ProgressBarState
 import com.mitch.ui_herolist.components.HeroListItem
 
 @Composable
 fun HeroList(
-    state: HeroListState
+    state: HeroListState,
+    imageLoader: ImageLoader,
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
@@ -25,7 +27,8 @@ fun HeroList(
                     hero = hero,
                     onSelectHero = {
 
-                    }
+                    },
+                    imageLoader = imageLoader,
                 )
             }
         }

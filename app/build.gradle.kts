@@ -46,6 +46,8 @@ dependencies{
     implementation(project(Modules.heroInteractors))
     implementation(project(Modules.ui_heroList))
 
+    implementation(Coil.coil)
+
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.lifecycleVmKtx)
