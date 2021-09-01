@@ -12,15 +12,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
+import javax.inject.Named
 
 
 @HiltViewModel
 class HeroListViewModel @Inject constructor(
     private val getHeroes: GetHeroes,
+    @Named("heroListLogger")private val logger: Logger,
 ) : ViewModel() {
     val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
-
-    private val logger = Logger("HeroListViewModel")
 
     init {
         getHeroes()
