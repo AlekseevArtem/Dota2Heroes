@@ -20,5 +20,9 @@ data class HeroInteractors(
                 )
             )
         }
+
+        val schema: SqlDriver.Schema = HeroCache.schema
+
+        val dbName: String = HeroCache.dbName
     }
 }
