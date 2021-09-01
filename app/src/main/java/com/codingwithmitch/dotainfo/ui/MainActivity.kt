@@ -20,6 +20,8 @@ import com.mitch.core.ProgressBarState
 import com.mitch.core.UiComponent
 import com.mitch.hero_domain.Hero
 import com.mitch.hero_interactors.HeroInteractors
+import com.mitch.ui_herolist.HeroList
+import com.mitch.ui_herolist.HeroListState
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -27,9 +29,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class MainActivity : ComponentActivity() {
-    private val heroes: MutableState<List<Hero>> = mutableStateOf(listOf())
-    private val progressBarState: MutableState<ProgressBarState> =
-        mutableStateOf(ProgressBarState.Idle)
+    private val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,10 +52,10 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 is DataState.Data -> {
-                    heroes.value = dataState.data ?: listOf()
+                    state.value = state.value.copy(heroes = dataState.data?: listOf())
                 }
                 is DataState.Loading -> {
-                    progressBarState.value = dataState.progressBarState
+                    state.value = state.value.copy(progressBarState = dataState.progressBarState)
                 }
             }
 
@@ -63,18 +63,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             DotaInfoTheme {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    LazyColumn {
-                        items(heroes.value) { hero ->
-                            Text(hero.localizedName)
-                        }
-                    }
-                    if (progressBarState.value is ProgressBarState.Loading) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-                }
+                HeroList(state = state.value)
             }
         }
     }
