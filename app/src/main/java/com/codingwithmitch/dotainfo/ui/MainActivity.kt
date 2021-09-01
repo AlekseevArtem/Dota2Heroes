@@ -26,11 +26,13 @@ import com.mitch.hero_interactors.HeroInteractors
 import com.mitch.ui_herolist.HeroList
 import com.mitch.ui_herolist.HeroListState
 import com.squareup.sqldelight.android.AndroidSqliteDriver
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
     private lateinit var imageLoader : ImageLoader
