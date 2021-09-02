@@ -6,7 +6,7 @@ import com.squareup.sqldelight.db.SqlDriver
 
 data class HeroInteractors(
     val getHeroes: GetHeroes,
-    //TODO(Add other hero interactors)
+    val getHeroFromCache: GetHeroFromCache,
 ) {
 
     companion object Factory {
@@ -17,7 +17,10 @@ data class HeroInteractors(
                 getHeroes = GetHeroes(
                     service = service,
                     cache = cache
-                )
+                ),
+                getHeroFromCache = GetHeroFromCache(
+                    cache = cache
+                ),
             )
         }
 
