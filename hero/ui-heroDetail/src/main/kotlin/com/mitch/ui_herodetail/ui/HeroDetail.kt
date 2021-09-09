@@ -1,11 +1,13 @@
-package com.mitch.ui_herodetail
+package com.mitch.ui_herodetail.ui
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
 fun HeroDetail(
-    heroId: Int?,
+    state: HeroDetailState,
 ) {
-    Text(text = "Hero id: $heroId")
+    state.hero?.let {
+        Text(text = state.hero.localizedName)
+    } ?: Text(text = "Loading...")
 }
