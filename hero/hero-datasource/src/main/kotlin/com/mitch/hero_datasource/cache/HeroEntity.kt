@@ -22,7 +22,7 @@ fun Hero_Entity.toHero(): Hero {
             pusher = rolePusher?.toInt() == 1,
         ),
         img = img,
-        icon = "${EndPoints.BASE_URL}$icon",
+        icon = icon,
         baseHealth = baseHealth.toFloat(),
         baseHealthRegen = baseHealthRegen?.toFloat(),
         baseMana = baseMana.toFloat(),
