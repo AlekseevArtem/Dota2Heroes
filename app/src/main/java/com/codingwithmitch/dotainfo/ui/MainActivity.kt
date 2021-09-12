@@ -3,6 +3,7 @@ package com.codingwithmitch.dotainfo.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @ExperimentalCoilApi
+@ExperimentalComposeUiApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -29,8 +31,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContent {
             DotaInfoTheme {
                 val navController = rememberNavController()
@@ -45,27 +45,28 @@ class MainActivity : ComponentActivity() {
                         addHeroDetail(
                             imageLoader = imageLoader,
                         )
-                    })
-
+                    }
+                )
             }
         }
     }
 }
 
 @ExperimentalCoilApi
+@ExperimentalComposeUiApi
 fun NavGraphBuilder.addHeroList(
     navController: NavController,
     imageLoader: ImageLoader,
 ) {
     composable(
-        route = Screen.HeroList.route
+        route = Screen.HeroList.route,
     ) {
-        val heroListViewModel: HeroListViewModel = hiltViewModel()
+        val viewModel: HeroListViewModel = hiltViewModel()
         HeroList(
-            state = heroListViewModel.state.value,
+            state = viewModel.state.value,
             imageLoader = imageLoader,
             navigateToDetailScreen = { heroId ->
-                navController.navigate(route = "${Screen.HeroDetail.route}/$heroId")
+                navController.navigate("${Screen.HeroDetail.route}/$heroId")
             }
         )
     }
@@ -86,16 +87,3 @@ fun NavGraphBuilder.addHeroDetail(
         )
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -31,28 +31,26 @@ fun HeroListItem(
     hero: Hero,
     onSelectHero: (Int) -> Unit,
     imageLoader: ImageLoader,
-){
+) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 8.dp)
             .background(MaterialTheme.colors.surface)
             .clickable {
                 onSelectHero(hero.id)
-            }
-        ,
+            },
         elevation = 8.dp
-    ){
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             val painter = rememberImagePainter(
                 data = hero.img,
                 imageLoader = imageLoader,
                 builder = {
-                    placeholder(if(isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
+                    placeholder(if (isSystemInDarkTheme()) R.drawable.black_background else R.drawable.white_background)
                 }
             )
             Image(
@@ -72,8 +70,7 @@ fun HeroListItem(
                 Text(
                     modifier = Modifier
                         .padding(bottom = 4.dp)
-                        .testTag(TAG_HERO_NAME)
-                    ,
+                        .testTag(TAG_HERO_NAME),
                     text = hero.localizedName,
                     style = MaterialTheme.typography.h4,
                     maxLines = 1,
@@ -81,8 +78,7 @@ fun HeroListItem(
                 )
                 Text(
                     modifier = Modifier
-                        .testTag(TAG_HERO_PRIMARY_ATTRIBUTE)
-                    ,
+                        .testTag(TAG_HERO_PRIMARY_ATTRIBUTE),
                     text = hero.primaryAttribute.uiValue,
                     style = MaterialTheme.typography.subtitle1,
                 )
@@ -90,17 +86,17 @@ fun HeroListItem(
             Column(
                 modifier = Modifier
                     .fillMaxWidth() // Fill the rest of the width (100% - 80% = 20%)
-                    .padding(end = 12.dp)
-                ,
+                    .padding(end = 12.dp),
                 horizontalAlignment = Alignment.End
             ) {
                 // Using remember in list item does not behave correctly?
 //                val proWR: Int = remember{round(hero.proWins.toDouble() / hero.proPick.toDouble() * 100).toInt()}
-                val proWR: Int = round(hero.proWins.toDouble() / hero.proPick.toDouble() * 100).toInt()
+                val proWR: Int =
+                    round(hero.proWins.toDouble() / hero.proPick.toDouble() * 100).toInt()
                 Text(
                     text = "${proWR}%",
                     style = MaterialTheme.typography.caption,
-                    color = if(proWR > 50) Color(0xFF009a34) else MaterialTheme.colors.error,
+                    color = if (proWR > 50) Color(0xFF009a34) else MaterialTheme.colors.error,
                 )
             }
         }
