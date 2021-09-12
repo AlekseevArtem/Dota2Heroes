@@ -1,4 +1,4 @@
-package com.mitch.ui_herolist
+package com.mitch.ui_herolist.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,10 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
 import com.mitch.core.ProgressBarState
 import com.mitch.ui_herolist.components.HeroListItem
 import com.mitch.ui_herolist.ui.HeroListState
 
+@ExperimentalCoilApi
 @Composable
 fun HeroList(
     state: HeroListState,

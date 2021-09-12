@@ -10,15 +10,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
 import com.codingwithmitch.dotainfo.ui.navigation.Screen
 import com.codingwithmitch.dotainfo.ui.theme.DotaInfoTheme
 import com.mitch.ui_herodetail.ui.HeroDetail
 import com.mitch.ui_herodetail.ui.HeroDetailViewModel
-import com.mitch.ui_herolist.HeroList
+import com.mitch.ui_herolist.ui.HeroList
 import com.mitch.ui_herolist.ui.HeroListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@ExperimentalCoilApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -40,7 +42,9 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                             imageLoader = imageLoader,
                         )
-                        addHeroDetail()
+                        addHeroDetail(
+                            imageLoader = imageLoader,
+                        )
                     })
 
             }
@@ -48,6 +52,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalCoilApi
 fun NavGraphBuilder.addHeroList(
     navController: NavController,
     imageLoader: ImageLoader,
@@ -66,14 +71,18 @@ fun NavGraphBuilder.addHeroList(
     }
 }
 
-fun NavGraphBuilder.addHeroDetail() {
+@ExperimentalCoilApi
+fun NavGraphBuilder.addHeroDetail(
+    imageLoader: ImageLoader,
+) {
     composable(
         route = Screen.HeroDetail.route + "/{heroId}",
         arguments = Screen.HeroDetail.arguments,
     ) {
         val viewModel: HeroDetailViewModel = hiltViewModel()
         HeroDetail(
-            state = viewModel.state.value
+            state = viewModel.state.value,
+            imageLoader = imageLoader,
         )
     }
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.mitch.hero_domain.Hero
 import com.mitch.ui_herolist.ui.test.TAG_HERO_NAME
@@ -24,6 +25,7 @@ import com.mitch.ui_herolist.ui.test.TAG_HERO_PRIMARY_ATTRIBUTE
 import kotlin.math.round
 import com.mitch.ui_herolist.R
 
+@ExperimentalCoilApi
 @Composable
 fun HeroListItem(
     hero: Hero,
